@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --background: 0 0% 100%;
+    --foreground: 213 56% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 56% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 56% 10%;
+
+    --primary: 172 82% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 213 56% 10%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 37%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 213 56% 10%;
+
+    --destructive: 0 100% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 100% 39%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 43 100% 50%;
+    --warning-foreground: 213 56% 10%;
+
+    --coral: 0 100% 65%;
+    --coral-foreground: 0 0% 100%;
+
+    --navy: 216 64% 10%;
+    --navy-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 172 82% 30%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 216 64% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 172 82% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 216 50% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 216 50% 18%;
+    --sidebar-ring: 172 82% 30%;
+    --sidebar-muted: 216 30% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-feature-settings: 'tnum' on, 'lnum' on;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .card-shadow {
+    box-shadow: 0 1px 3px 0 hsl(var(--navy) / 0.04), 0 4px 12px -2px hsl(var(--navy) / 0.06);
+  }
+  .card-shadow-hover {
+    box-shadow: 0 2px 8px 0 hsl(var(--navy) / 0.06), 0 8px 24px -4px hsl(var(--navy) / 0.1);
+  }
+  .panel-shadow {
+    box-shadow: -4px 0 24px -4px hsl(var(--navy) / 0.12);
+  }
+}
