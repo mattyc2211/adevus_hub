@@ -15,27 +15,31 @@ export function FilterBar({ items }: { items: Item[] }) {
   const priorities: ItemPriority[] = ['Low', 'Medium', 'High', 'Critical'];
   const hasFilters = filterType || filterPriority || filterAssignee || filterMilestone || filterOwner;
 
+  const chipBase = 'text-[11px] font-medium px-2 py-1 rounded border transition-colors';
+  const chipActive = 'bg-primary/10 text-primary border-primary/30';
+  const chipInactive = 'border-border text-muted-foreground hover:border-primary/20 hover:text-foreground';
+  const selectCls = 'text-[11px] font-medium px-2 py-1 rounded border border-border bg-transparent text-muted-foreground hover:border-primary/20 focus:outline-none focus:border-primary';
+
   return (
-    <div className="flex items-center gap-2 px-6 pb-4 flex-wrap">
-      <span className="text-xs text-muted-foreground mr-1">Filter:</span>
+    <div className="flex items-center gap-1.5 px-6 pb-3 flex-wrap">
       {types.map((t) => (
-        <button key={t} onClick={() => setFilter({ type: filterType === t ? null : t })} className={cn('text-[11px] font-medium px-2.5 py-1 rounded-full border transition-colors', filterType === t ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/30 hover:text-foreground')}>{t}</button>
+        <button key={t} onClick={() => setFilter({ type: filterType === t ? null : t })} className={cn(chipBase, filterType === t ? chipActive : chipInactive)}>{t}</button>
       ))}
-      <div className="w-px h-4 bg-border mx-1" />
+      <div className="w-px h-4 bg-border mx-0.5" />
       {priorities.map((p) => (
-        <button key={p} onClick={() => setFilter({ priority: filterPriority === p ? null : p })} className={cn('text-[11px] font-medium px-2.5 py-1 rounded-full border transition-colors', filterPriority === p ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground hover:border-primary/30 hover:text-foreground')}>{p}</button>
+        <button key={p} onClick={() => setFilter({ priority: filterPriority === p ? null : p })} className={cn(chipBase, filterPriority === p ? chipActive : chipInactive)}>{p}</button>
       ))}
-      <div className="w-px h-4 bg-border mx-1" />
-      <select value={filterMilestone || ''} onChange={(e) => setFilter({ milestone: e.target.value || null })} className="text-[11px] font-medium px-2.5 py-1 rounded-full border border-border bg-transparent text-muted-foreground hover:border-primary/30 focus:outline-none focus:border-primary">
-        <option value="">All milestones</option>
+      <div className="w-px h-4 bg-border mx-0.5" />
+      <select value={filterMilestone || ''} onChange={(e) => setFilter({ milestone: e.target.value || null })} className={selectCls}>
+        <option value="">Milestone</option>
         {MILESTONE_OPTIONS.map((m) => <option key={m} value={m}>{m}</option>)}
       </select>
-      <select value={filterOwner || ''} onChange={(e) => setFilter({ owner: e.target.value || null })} className="text-[11px] font-medium px-2.5 py-1 rounded-full border border-border bg-transparent text-muted-foreground hover:border-primary/30 focus:outline-none focus:border-primary">
-        <option value="">All owners</option>
+      <select value={filterOwner || ''} onChange={(e) => setFilter({ owner: e.target.value || null })} className={selectCls}>
+        <option value="">Owner</option>
         {OWNER_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
       </select>
-      <select value={filterAssignee || ''} onChange={(e) => setFilter({ assignee: e.target.value || null })} className="text-[11px] font-medium px-2.5 py-1 rounded-full border border-border bg-transparent text-muted-foreground hover:border-primary/30 focus:outline-none focus:border-primary">
-        <option value="">All assignees</option>
+      <select value={filterAssignee || ''} onChange={(e) => setFilter({ assignee: e.target.value || null })} className={selectCls}>
+        <option value="">Assignee</option>
         {assignees.map((a) => <option key={a} value={a}>{a}</option>)}
       </select>
       {hasFilters && (

@@ -86,15 +86,15 @@ export function AppsManagement() {
   if (!isAdmin) {
     return (
       <div className="p-8 max-w-3xl">
-        <h1 className="text-2xl font-bold text-foreground mb-1">Apps</h1>
-        <p className="text-sm text-muted-foreground mb-6">You need admin access to manage apps.</p>
+        <h1 className="text-base font-semibold text-foreground mb-1">Apps</h1>
+        <p className="text-xs text-muted-foreground mb-6">You need admin access to manage apps.</p>
         <div className="space-y-2">
           {activeApps.map((app) => {
             const isExpanded = expandedAppId === app.id;
             const appData = app as any;
             const hasContent = appData.prompts || appData.documentation;
             return (
-              <div key={app.id} className="rounded-lg bg-card card-shadow overflow-hidden">
+              <div key={app.id} className="rounded bg-card card-shadow overflow-hidden">
                 <button onClick={() => hasContent && toggleExpand(app.id)} className={cn("w-full flex items-center gap-3 px-4 py-3 text-left", hasContent && "cursor-pointer hover:bg-muted/30 transition-colors")}>
                   <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: app.color_tag }} />
                   <div className="flex-1">
@@ -121,11 +121,11 @@ export function AppsManagement() {
     <div className="p-8 max-w-3xl">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Apps</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Create and manage your apps.</p>
+          <h1 className="text-base font-semibold text-foreground">Products</h1>
+          <p className="text-xs text-muted-foreground mt-0.5">Create and manage your products.</p>
         </div>
         {!showForm && (
-          <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors">
+          <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-2 px-4 py-2 rounded bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors">
             <Plus className="w-4 h-4" /> New App
           </button>
         )}
@@ -133,11 +133,11 @@ export function AppsManagement() {
 
       {/* Create / Edit Form */}
       {showForm && (
-        <div className="bg-card rounded-lg p-5 card-shadow mb-6 border border-border">
+        <div className="bg-card rounded p-5 card-shadow mb-6 border border-border">
           <h3 className="text-sm font-semibold text-foreground mb-4">{editingId ? 'Edit App' : 'Create New App'}</h3>
           <div className="space-y-3">
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="App name" autoFocus className="w-full text-sm bg-muted/30 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground" />
-            <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Short description" className="w-full text-sm bg-muted/30 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground" />
+            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="App name" autoFocus className="w-full text-sm bg-muted/30 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground" />
+            <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Short description" className="w-full text-sm bg-muted/30 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground" />
             <div>
               <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Colour Tag</p>
               <div className="flex gap-2">
@@ -150,19 +150,19 @@ export function AppsManagement() {
               <label className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5">
                 <Sparkles className="w-3 h-3" /> AI Prompts
               </label>
-              <textarea value={prompts} onChange={(e) => setPrompts(e.target.value)} placeholder="Paste the prompts used to create this app with AI..." rows={4} className="w-full text-sm bg-muted/30 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground resize-y" />
+              <textarea value={prompts} onChange={(e) => setPrompts(e.target.value)} placeholder="Paste the prompts used to create this app with AI..." rows={4} className="w-full text-sm bg-muted/30 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground resize-y" />
             </div>
             <div>
               <label className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5">
                 <BookOpen className="w-3 h-3" /> Documentation
               </label>
-              <textarea value={documentation} onChange={(e) => setDocumentation(e.target.value)} placeholder="Architecture notes, setup instructions, key decisions..." rows={4} className="w-full text-sm bg-muted/30 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground resize-y" />
+              <textarea value={documentation} onChange={(e) => setDocumentation(e.target.value)} placeholder="Architecture notes, setup instructions, key decisions..." rows={4} className="w-full text-sm bg-muted/30 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground resize-y" />
             </div>
             <div className="flex gap-2 pt-1">
-              <button onClick={handleSubmit} disabled={createApp.isPending || updateApp.isPending} className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50">
+              <button onClick={handleSubmit} disabled={createApp.isPending || updateApp.isPending} className="px-4 py-2 rounded bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50">
                 {editingId ? 'Save Changes' : 'Create App'}
               </button>
-              <button onClick={resetForm} className="px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground transition-colors">Cancel</button>
+              <button onClick={resetForm} className="px-4 py-2 rounded border border-border text-sm text-muted-foreground hover:text-foreground transition-colors">Cancel</button>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@ export function AppsManagement() {
           const isExpanded = expandedAppId === app.id;
           const appData = app as any;
           return (
-            <div key={app.id} className="rounded-lg bg-card card-shadow overflow-hidden">
+            <div key={app.id} className="rounded bg-card card-shadow overflow-hidden">
               <div className="flex items-center gap-3 px-4 py-3 group">
                 <button onClick={() => toggleExpand(app.id)} className="text-muted-foreground hover:text-foreground transition-colors">
                   {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
@@ -227,7 +227,7 @@ export function AppsManagement() {
           <div className="text-center py-12">
             <p className="text-lg font-semibold text-foreground mb-1">No apps yet</p>
             <p className="text-sm text-muted-foreground mb-4">Create your first app to start tracking work.</p>
-            <button onClick={() => setShowForm(true)} className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors">Create First App</button>
+            <button onClick={() => setShowForm(true)} className="px-4 py-2 rounded bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors">Create First App</button>
           </div>
         )}
       </div>
@@ -241,7 +241,7 @@ export function AppsManagement() {
           {showArchived && (
             <div className="space-y-2 mt-3">
               {archivedApps.map((app) => (
-                <div key={app.id} className="flex items-center gap-3 px-4 py-3 rounded-lg bg-muted/30 group">
+                <div key={app.id} className="flex items-center gap-3 px-4 py-3 rounded bg-muted/30 group">
                   <div className="w-3 h-3 rounded-full flex-shrink-0 opacity-40" style={{ backgroundColor: app.color_tag }} />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-muted-foreground">{app.name}</p>
@@ -262,7 +262,7 @@ function DocSection({ icon, label, content }: { icon: React.ReactNode; label: st
   return (
     <div>
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5 flex items-center gap-1.5">{icon} {label}</p>
-      <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 rounded-lg p-3">{content}</div>
+      <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 rounded p-3">{content}</div>
     </div>
   );
 }
@@ -284,14 +284,14 @@ function EditableDocSection({ icon, label, content, placeholder, isEditing, edit
       </div>
       {isEditing ? (
         <div className="space-y-2">
-          <textarea value={editValue} onChange={(e) => onEditChange(e.target.value)} placeholder={placeholder} rows={5} autoFocus className="w-full text-sm bg-muted/30 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground resize-y" />
+          <textarea value={editValue} onChange={(e) => onEditChange(e.target.value)} placeholder={placeholder} rows={5} autoFocus className="w-full text-sm bg-muted/30 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground resize-y" />
           <div className="flex gap-2">
             <button onClick={onSave} className="px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-colors">Save</button>
             <button onClick={onCancel} className="px-3 py-1.5 rounded-md border border-border text-xs text-muted-foreground hover:text-foreground transition-colors">Cancel</button>
           </div>
         </div>
       ) : content ? (
-        <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 rounded-lg p-3">{content}</div>
+        <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap bg-muted/30 rounded p-3">{content}</div>
       ) : (
         <p className="text-xs text-muted-foreground italic">No {label.toLowerCase()} added yet.</p>
       )}

@@ -9,11 +9,11 @@ export const STATUS_ORDER: ItemStatus[] = ['Idea', 'In Progress', 'In Review', '
 
 export function getTypeColor(type: ItemType) {
   switch (type) {
-    case 'Feature': return { bg: 'bg-primary/10', text: 'text-primary', dot: 'bg-primary', border: 'border-l-primary' };
-    case 'Bug': return { bg: 'bg-coral/10', text: 'text-coral', dot: 'bg-coral', border: 'border-l-coral' };
-    case 'Decision': return { bg: 'bg-warning/10', text: 'text-warning', dot: 'bg-warning', border: 'border-l-warning' };
-    case 'Deployment': return { bg: 'bg-success/10', text: 'text-success', dot: 'bg-success', border: 'border-l-success' };
-    case 'Security': return { bg: 'bg-orange-500/10', text: 'text-orange-600', dot: 'bg-orange-500', border: 'border-l-orange-500' };
+    case 'Feature': return { bg: 'bg-primary/8', text: 'text-primary', dot: 'bg-primary', border: 'border-l-primary' };
+    case 'Bug': return { bg: 'bg-coral/8', text: 'text-coral', dot: 'bg-coral', border: 'border-l-coral' };
+    case 'Decision': return { bg: 'bg-warning/8', text: 'text-warning', dot: 'bg-warning', border: 'border-l-warning' };
+    case 'Deployment': return { bg: 'bg-success/8', text: 'text-success', dot: 'bg-success', border: 'border-l-success' };
+    case 'Security': return { bg: 'bg-orange-500/8', text: 'text-orange-600', dot: 'bg-orange-500', border: 'border-l-orange-500' };
   }
 }
 
@@ -96,14 +96,14 @@ export function getInitials(name: string) {
 }
 
 const AVATAR_COLORS = [
-  'hsl(var(--primary))',
-  'hsl(var(--coral))',
-  'hsl(var(--warning))',
-  'hsl(var(--success))',
-  'hsl(210 60% 50%)',
-  'hsl(280 60% 50%)',
-  'hsl(340 60% 50%)',
-  'hsl(160 60% 40%)',
+  'hsl(238 50% 55%)',
+  'hsl(0 50% 52%)',
+  'hsl(43 55% 45%)',
+  'hsl(152 40% 38%)',
+  'hsl(210 45% 48%)',
+  'hsl(280 40% 48%)',
+  'hsl(340 40% 48%)',
+  'hsl(160 40% 38%)',
 ];
 
 export function getUserColor(name: string) {
@@ -131,4 +131,15 @@ export function getGreeting() {
   if (hour < 12) return 'Good morning';
   if (hour < 18) return 'Good afternoon';
   return 'Good evening';
+}
+
+export function getStatusDot(status: ItemStatus) {
+  switch (status) {
+    case 'Idea': return 'bg-muted-foreground';
+    case 'In Progress': return 'bg-warning';
+    case 'In Review': return 'bg-primary';
+    case 'Done': return 'bg-success';
+    case 'Deployed': return 'bg-success';
+    case 'Blocked': return 'bg-coral';
+  }
 }

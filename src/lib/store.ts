@@ -4,10 +4,12 @@ import type { Database } from '@/integrations/supabase/types';
 type ItemType = Database['public']['Enums']['item_type'];
 type ItemPriority = Database['public']['Enums']['item_priority'];
 
+export type ActiveView = 'dashboard' | 'board' | 'table' | 'roadmap' | 'settings' | 'apps-manage';
+
 interface UIStore {
-  selectedAppId: string | null; // null = dashboard, 'all', 'changelog', 'settings', 'roadmap', 'security', or app UUID
+  activeView: ActiveView;
+  activeProjectId: string | null; // null = All Projects, or app UUID
   selectedItemId: string | null;
-  viewMode: Record<string, 'board' | 'list'>;
   filterType: ItemType | null;
   filterPriority: ItemPriority | null;
   filterAssignee: string | null;
@@ -15,9 +17,9 @@ interface UIStore {
   filterOwner: string | null;
   quickAddOpen: boolean;
 
-  setSelectedApp: (id: string | null) => void;
+  setActiveView: (view: ActiveView) => void;
+  setActiveProject: (id: string | null) => void;
   setSelectedItem: (id: string | null) => void;
-  setViewMode: (appId: string, mode: 'board' | 'list') => void;
   setFilter: (filter: {
     type?: ItemType | null;
     priority?: ItemPriority | null;
@@ -30,9 +32,9 @@ interface UIStore {
 }
 
 export const useUIStore = create<UIStore>((set) => ({
-  selectedAppId: null,
+  activeView: 'dashboard',
+  activeProjectId: null,
   selectedItemId: null,
-  viewMode: {},
   filterType: null,
   filterPriority: null,
   filterAssignee: null,
@@ -40,9 +42,9 @@ export const useUIStore = create<UIStore>((set) => ({
   filterOwner: null,
   quickAddOpen: false,
 
-  setSelectedApp: (id) => set({ selectedAppId: id, selectedItemId: null }),
+  setActiveView: (view) => set({ activeView: view, selectedItemId: null }),
+  setActiveProject: (id) => set({ activeProjectId: id }),
   setSelectedItem: (id) => set({ selectedItemId: id }),
-  setViewMode: (appId, mode) => set((s) => ({ viewMode: { ...s.viewMode, [appId]: mode } })),
   setFilter: (filter) => set((s) => ({
     filterType: filter.type !== undefined ? filter.type : s.filterType,
     filterPriority: filter.priority !== undefined ? filter.priority : s.filterPriority,
